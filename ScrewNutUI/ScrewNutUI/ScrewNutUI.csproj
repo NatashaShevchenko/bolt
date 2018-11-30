@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BuildManager.cs" />
     <Compile Include="KompasApplication.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

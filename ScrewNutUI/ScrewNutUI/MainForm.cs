@@ -98,8 +98,12 @@ namespace ScrewNutUI
             }
         }
 
+
         #endregion
 
+        private void NutGroupBox_Enter(object sender, EventArgs e)
+        {
 
+        }
     }
 }
