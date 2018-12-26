@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using ScrewNutUI.Builders;
+using ScrewNutUI.Parameters;
 
 namespace ScrewNutUI
 {
@@ -98,12 +100,28 @@ namespace ScrewNutUI
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия на кнопку "Построить"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BuildButton_Click(object sender, EventArgs e)
+        {
+            _kompasApp.CreateDocument3D();
+            var builder = new BoltBuilder(_kompasApp);
+            var parameters = new BoltParameters
+            {
+                DiameterOut = 5,
+                HatHeight = 3,
+                ChamferAngle = 15,
+                ShaftDiameter = 2.5,
+                ShaftLength = 5
+            };
+            builder.BuildDetail(parameters);
+        }
 
         #endregion
 
-        private void NutGroupBox_Enter(object sender, EventArgs e)
-        {
 
-        }
     }
 }

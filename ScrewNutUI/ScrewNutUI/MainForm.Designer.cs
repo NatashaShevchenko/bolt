@@ -241,7 +241,6 @@
             this.NutGroupBox.TabIndex = 2;
             this.NutGroupBox.TabStop = false;
             this.NutGroupBox.Text = "Гайка";
-            this.NutGroupBox.Enter += new System.EventHandler(this.NutGroupBox_Enter);
             // 
             // NutDiameterNumeric
             // 
@@ -313,6 +312,7 @@
             this.BuildButton.TabIndex = 2;
             this.BuildButton.Text = "Построить";
             this.BuildButton.UseVisualStyleBackColor = true;
+            this.BuildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
             // MainForm
             // 
