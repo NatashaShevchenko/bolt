@@ -1,120 +1,87 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Kompas6API5;
 using Kompas6Constants3D;
 
-
 namespace ScrewNutUI
 {
     /// <summary>
-    /// Менеджер Компаса
+    /// Screwdriver type
+    /// </summary>
+    public enum ScrewdriverHoleType
+    {
+        [Description("Без отверстия")]
+        None,
+        [Description("Шестигранное")]
+        Hexagon,
+        [Description("Четырёхранное")]
+        Tetrahedral,
+        [Description("Плоское")]
+        Flat
+    }
+
+    /// <summary>
+    ///     Kompas 3D manager
     /// </summary>
     public class KompasApplication
     {
         /// <summary>
-        /// Экземпляр запущенной программы Компас
-        /// </summary>
-        public KompasObject KompasObject
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Документ 3D моделей
-        /// </summary>
-        public ksDocument3D Document3D
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Деталь Болт
-        /// </summary>
-        public ksPart ScrewPart
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Деталь Гайка
-        /// </summary>
-        public ksPart NutPart
-        {
-            get;
-            private set;
-        }
-
-        /// <summary>
-        /// Шаг резьбы 
-        /// </summary>
-        public double ThreadStep
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Параметры моделей
-        /// </summary>
-        public List<double> Parameters
-        {
-            get;
-            set;
-        }
-
-        /// <summary>
-        /// Конструктор по умолчанию
+        ///     Object constructor
         /// </summary>
         public KompasApplication()
         {
             if (!GetActiveApp())
-            {
                 if (!CreateNewApp())
                 {
-                    return;
+                    throw new InvalidOperationException("При подключению к Компасу произошла ошибка");
                 }
-            }
         }
 
         /// <summary>
-        /// Create 3D document
+        ///     Active Kompas 3D window
+        /// </summary>
+        public KompasObject KompasObject { get; private set; }
+
+        /// <summary>
+        ///     Kompas 3D document
+        /// </summary>
+        public ksDocument3D Document3D { get; private set; }
+
+        /// <summary>
+        ///     Screw detail
+        /// </summary>
+        public ksPart ScrewPart { get; private set; }
+
+        /// <summary>
+        ///     Model parameters
+        /// </summary>
+        public List<double> Parameters { get; set; }
+
+        public ScrewdriverHoleType ScrewdriverHoleType { get; set; }
+
+        /// <summary>
+        ///     Create 3D document
         /// </summary>
         public void CreateDocument3D()
         {
-            Document3D = (ksDocument3D)KompasObject.Document3D();
+            Document3D = (ksDocument3D) KompasObject.Document3D();
 
             // Create build
-            if (!Document3D.Create(false/*visible*/, false/*build*/))
-            {
+            if (!Document3D.Create(false /*visible*/, false /*build*/))
                 throw new ArgumentException("Ошибка создания документа");
-            }
 
             // Create screw detail on 3D document
-            ScrewPart = (ksPart)Document3D.GetPart((short)Part_Type.pTop_Part);
-
-            // Create nut detail on 3D document
-            NutPart = (ksPart)Document3D.GetPart((short)Part_Type.pTop_Part);
-
-            if (ScrewPart == null
-                || NutPart == null
-            )
-            {
-                throw new ArgumentException("Ошибка создания деталей");
-            }
-         
+            ScrewPart = (ksPart) Document3D.GetPart((short) Part_Type.pTop_Part);
         }
 
         /// <summary>
-        /// Получить открытую сессию Компаса
+        ///     Get open session Kompas 3D
         /// </summary>
-        /// <returns>true, если проведено успешно, false, если произошли ошибки</returns>
+        /// <returns>true, if succesfull, false, if have errors</returns>
         private bool GetActiveApp()
         {
-            // Попробовать получить открытую сессию
             if (KompasObject == null)
             {
                 try
@@ -127,31 +94,8 @@ namespace ScrewNutUI
                 }
             }
 
-            // Если не загрузилось - выйти из метода
             if (KompasObject == null)
-            {
                 return false;
-            }
-
-            KompasObject.Visible = true;        // Сделать окно видимым
-            KompasObject.ActivateControllerAPI(); // Активировать контроллер API
-
-            return true;
-        }
-
-        /// <summary>
-        /// Создает новую сессию Компас
-        /// </summary>
-        /// <returns>true, если проведено успешно, false, если произошли ошибки</returns>
-        private bool CreateNewApp()
-        {
-            Type t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-            KompasObject = (KompasObject)Activator.CreateInstance(t);
-
-            if (KompasObject == null)
-            {
-                return false;
-            }
 
             KompasObject.Visible = true;
             KompasObject.ActivateControllerAPI();
@@ -160,16 +104,33 @@ namespace ScrewNutUI
         }
 
         /// <summary>
-        /// Деструктор объекта Компас
+        ///     Create new session Kompas 3D
+        /// </summary>
+        /// <returns>true, if succesfull, false, if have errors</returns>
+        public bool CreateNewApp()
+        {
+            var t = Type.GetTypeFromProgID("KOMPAS.Application.5");
+            KompasObject = (KompasObject) Activator.CreateInstance(t);
+
+            if (KompasObject == null) return false;
+
+            KompasObject.Visible = true;
+            KompasObject.ActivateControllerAPI();
+
+            return true;
+        }
+
+        /// <summary>
+        ///     Destruct Kompas 3D application
         /// </summary>
         public void DestructApp()
         {
+            Document3D?.close();
             KompasObject.Quit();
             KompasObject = null;
 
             Document3D = null;
             ScrewPart = null;
-            NutPart = null;
         }
     }
 }

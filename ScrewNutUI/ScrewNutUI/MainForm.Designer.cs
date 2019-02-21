@@ -32,47 +32,47 @@
             this.CloseButton = new System.Windows.Forms.Button();
             this.LaunchButton = new System.Windows.Forms.Button();
             this.BoltGroupBox = new System.Windows.Forms.GroupBox();
-            this.HeadDiameterNumeric = new System.Windows.Forms.NumericUpDown();
-            this.HeadLengthNumeric = new System.Windows.Forms.NumericUpDown();
+            this.ScrewdriverHoleTypeComboBox = new System.Windows.Forms.ComboBox();
+            this.lbl6 = new System.Windows.Forms.Label();
+            this.lbl2 = new System.Windows.Forms.Label();
+            this.ChamferRadiusNumeric = new System.Windows.Forms.NumericUpDown();
+            this.HatDiameterNumeric = new System.Windows.Forms.NumericUpDown();
+            this.lbl5 = new System.Windows.Forms.Label();
             this.ThreadLengthNumeric = new System.Windows.Forms.NumericUpDown();
-            this.SmoothLengthNumeric = new System.Windows.Forms.NumericUpDown();
-            this.HeadDiameterLabel = new System.Windows.Forms.Label();
-            this.HeadLengthLabel = new System.Windows.Forms.Label();
-            this.ThreadLabel = new System.Windows.Forms.Label();
-            this.SmoothLengthLabel = new System.Windows.Forms.Label();
-            this.NutGroupBox = new System.Windows.Forms.GroupBox();
-            this.NutDiameterNumeric = new System.Windows.Forms.NumericUpDown();
-            this.NutHeightNumeric = new System.Windows.Forms.NumericUpDown();
-            this.NutDiameterLabel = new System.Windows.Forms.Label();
-            this.NutHeightLabel = new System.Windows.Forms.Label();
+            this.KernelLengthNumeric = new System.Windows.Forms.NumericUpDown();
+            this.HatLengthNumeric = new System.Windows.Forms.NumericUpDown();
+            this.lbl4 = new System.Windows.Forms.Label();
+            this.lbl3 = new System.Windows.Forms.Label();
+            this.lbl1 = new System.Windows.Forms.Label();
             this.BuildButton = new System.Windows.Forms.Button();
             this.KompasGroupBox.SuspendLayout();
             this.BoltGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadDiameterNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadLengthNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChamferRadiusNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HatDiameterNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThreadLengthNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SmoothLengthNumeric)).BeginInit();
-            this.NutGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NutDiameterNumeric)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NutHeightNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.KernelLengthNumeric)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HatLengthNumeric)).BeginInit();
             this.SuspendLayout();
             // 
             // KompasGroupBox
             // 
             this.KompasGroupBox.Controls.Add(this.CloseButton);
             this.KompasGroupBox.Controls.Add(this.LaunchButton);
-            this.KompasGroupBox.Location = new System.Drawing.Point(12, 12);
+            this.KompasGroupBox.Location = new System.Drawing.Point(16, 15);
+            this.KompasGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.KompasGroupBox.Name = "KompasGroupBox";
-            this.KompasGroupBox.Size = new System.Drawing.Size(334, 61);
+            this.KompasGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.KompasGroupBox.Size = new System.Drawing.Size(445, 75);
             this.KompasGroupBox.TabIndex = 0;
             this.KompasGroupBox.TabStop = false;
             this.KompasGroupBox.Text = "Компас 3D";
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(207, 19);
+            this.CloseButton.Location = new System.Drawing.Point(276, 23);
+            this.CloseButton.Margin = new System.Windows.Forms.Padding(4);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(115, 25);
+            this.CloseButton.Size = new System.Drawing.Size(153, 31);
             this.CloseButton.TabIndex = 1;
             this.CloseButton.Text = "Закрыть";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -80,9 +80,10 @@
             // 
             // LaunchButton
             // 
-            this.LaunchButton.Location = new System.Drawing.Point(6, 19);
+            this.LaunchButton.Location = new System.Drawing.Point(8, 23);
+            this.LaunchButton.Margin = new System.Windows.Forms.Padding(4);
             this.LaunchButton.Name = "LaunchButton";
-            this.LaunchButton.Size = new System.Drawing.Size(115, 25);
+            this.LaunchButton.Size = new System.Drawing.Size(153, 31);
             this.LaunchButton.TabIndex = 0;
             this.LaunchButton.Text = "Запуск";
             this.LaunchButton.UseVisualStyleBackColor = true;
@@ -90,225 +91,217 @@
             // 
             // BoltGroupBox
             // 
-            this.BoltGroupBox.Controls.Add(this.HeadDiameterNumeric);
-            this.BoltGroupBox.Controls.Add(this.HeadLengthNumeric);
+            this.BoltGroupBox.Controls.Add(this.ScrewdriverHoleTypeComboBox);
+            this.BoltGroupBox.Controls.Add(this.lbl6);
+            this.BoltGroupBox.Controls.Add(this.lbl2);
+            this.BoltGroupBox.Controls.Add(this.ChamferRadiusNumeric);
+            this.BoltGroupBox.Controls.Add(this.HatDiameterNumeric);
+            this.BoltGroupBox.Controls.Add(this.lbl5);
             this.BoltGroupBox.Controls.Add(this.ThreadLengthNumeric);
-            this.BoltGroupBox.Controls.Add(this.SmoothLengthNumeric);
-            this.BoltGroupBox.Controls.Add(this.HeadDiameterLabel);
-            this.BoltGroupBox.Controls.Add(this.HeadLengthLabel);
-            this.BoltGroupBox.Controls.Add(this.ThreadLabel);
-            this.BoltGroupBox.Controls.Add(this.SmoothLengthLabel);
-            this.BoltGroupBox.Location = new System.Drawing.Point(12, 79);
+            this.BoltGroupBox.Controls.Add(this.KernelLengthNumeric);
+            this.BoltGroupBox.Controls.Add(this.HatLengthNumeric);
+            this.BoltGroupBox.Controls.Add(this.lbl4);
+            this.BoltGroupBox.Controls.Add(this.lbl3);
+            this.BoltGroupBox.Controls.Add(this.lbl1);
+            this.BoltGroupBox.Location = new System.Drawing.Point(16, 97);
+            this.BoltGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.BoltGroupBox.Name = "BoltGroupBox";
-            this.BoltGroupBox.Size = new System.Drawing.Size(334, 134);
+            this.BoltGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.BoltGroupBox.Size = new System.Drawing.Size(445, 216);
             this.BoltGroupBox.TabIndex = 1;
             this.BoltGroupBox.TabStop = false;
-            this.BoltGroupBox.Text = "Болт";
+            this.BoltGroupBox.Text = "Параметры болта";
             // 
-            // HeadDiameterNumeric
+            // ScrewdriverHoleTypeComboBox
             // 
-            this.HeadDiameterNumeric.Location = new System.Drawing.Point(244, 97);
-            this.HeadDiameterNumeric.Maximum = new decimal(new int[] {
-            75,
-            0,
-            0,
-            0});
-            this.HeadDiameterNumeric.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.HeadDiameterNumeric.Name = "HeadDiameterNumeric";
-            this.HeadDiameterNumeric.Size = new System.Drawing.Size(78, 20);
-            this.HeadDiameterNumeric.TabIndex = 13;
-            this.HeadDiameterNumeric.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.ScrewdriverHoleTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ScrewdriverHoleTypeComboBox.FormattingEnabled = true;
+            this.ScrewdriverHoleTypeComboBox.Location = new System.Drawing.Point(292, 176);
+            this.ScrewdriverHoleTypeComboBox.Name = "ScrewdriverHoleTypeComboBox";
+            this.ScrewdriverHoleTypeComboBox.Size = new System.Drawing.Size(137, 24);
+            this.ScrewdriverHoleTypeComboBox.TabIndex = 17;
             // 
-            // HeadLengthNumeric
+            // lbl6
             // 
-            this.HeadLengthNumeric.Location = new System.Drawing.Point(244, 71);
-            this.HeadLengthNumeric.Maximum = new decimal(new int[] {
-            83,
-            0,
-            0,
-            0});
-            this.HeadLengthNumeric.Minimum = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
-            this.HeadLengthNumeric.Name = "HeadLengthNumeric";
-            this.HeadLengthNumeric.Size = new System.Drawing.Size(78, 20);
-            this.HeadLengthNumeric.TabIndex = 12;
-            this.HeadLengthNumeric.Value = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
+            this.lbl6.AutoSize = true;
+            this.lbl6.Location = new System.Drawing.Point(8, 176);
+            this.lbl6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl6.Name = "lbl6";
+            this.lbl6.Size = new System.Drawing.Size(170, 17);
+            this.lbl6.TabIndex = 16;
+            this.lbl6.Text = "Отверстие под отвертку";
             // 
-            // ThreadLengthNumeric
+            // lbl2
             // 
-            this.ThreadLengthNumeric.Location = new System.Drawing.Point(244, 45);
-            this.ThreadLengthNumeric.Maximum = new decimal(new int[] {
-            150,
-            0,
-            0,
-            0});
-            this.ThreadLengthNumeric.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.ThreadLengthNumeric.Name = "ThreadLengthNumeric";
-            this.ThreadLengthNumeric.Size = new System.Drawing.Size(78, 20);
-            this.ThreadLengthNumeric.TabIndex = 11;
-            this.ThreadLengthNumeric.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
+            this.lbl2.AutoSize = true;
+            this.lbl2.Location = new System.Drawing.Point(8, 26);
+            this.lbl2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl2.Name = "lbl2";
+            this.lbl2.Size = new System.Drawing.Size(121, 17);
+            this.lbl2.TabIndex = 7;
+            this.lbl2.Text = "Диаметр шляпки";
             // 
-            // SmoothLengthNumeric
+            // ChamferRadiusNumeric
             // 
-            this.SmoothLengthNumeric.Location = new System.Drawing.Point(244, 19);
-            this.SmoothLengthNumeric.Maximum = new decimal(new int[] {
-            150,
-            0,
-            0,
-            0});
-            this.SmoothLengthNumeric.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.SmoothLengthNumeric.Name = "SmoothLengthNumeric";
-            this.SmoothLengthNumeric.Size = new System.Drawing.Size(78, 20);
-            this.SmoothLengthNumeric.TabIndex = 10;
-            this.SmoothLengthNumeric.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // HeadDiameterLabel
-            // 
-            this.HeadDiameterLabel.AutoSize = true;
-            this.HeadDiameterLabel.Location = new System.Drawing.Point(6, 99);
-            this.HeadDiameterLabel.Name = "HeadDiameterLabel";
-            this.HeadDiameterLabel.Size = new System.Drawing.Size(207, 13);
-            this.HeadDiameterLabel.TabIndex = 9;
-            this.HeadDiameterLabel.Text = "Диаметр окружности головки болта (d)";
-            // 
-            // HeadLengthLabel
-            // 
-            this.HeadLengthLabel.AutoSize = true;
-            this.HeadLengthLabel.Location = new System.Drawing.Point(6, 73);
-            this.HeadLengthLabel.Name = "HeadLengthLabel";
-            this.HeadLengthLabel.Size = new System.Drawing.Size(142, 13);
-            this.HeadLengthLabel.TabIndex = 8;
-            this.HeadLengthLabel.Text = "Длина головки болта (W3)";
-            // 
-            // ThreadLabel
-            // 
-            this.ThreadLabel.AutoSize = true;
-            this.ThreadLabel.Location = new System.Drawing.Point(6, 47);
-            this.ThreadLabel.Name = "ThreadLabel";
-            this.ThreadLabel.Size = new System.Drawing.Size(232, 13);
-            this.ThreadLabel.TabIndex = 7;
-            this.ThreadLabel.Text = "Длина резьбовой части стержня болта (W2)";
-            // 
-            // SmoothLengthLabel
-            // 
-            this.SmoothLengthLabel.AutoSize = true;
-            this.SmoothLengthLabel.Location = new System.Drawing.Point(6, 21);
-            this.SmoothLengthLabel.Name = "SmoothLengthLabel";
-            this.SmoothLengthLabel.Size = new System.Drawing.Size(219, 13);
-            this.SmoothLengthLabel.TabIndex = 3;
-            this.SmoothLengthLabel.Text = "Длина гладкой части стержня болта (W1)";
-            // 
-            // NutGroupBox
-            // 
-            this.NutGroupBox.Controls.Add(this.NutDiameterNumeric);
-            this.NutGroupBox.Controls.Add(this.NutHeightNumeric);
-            this.NutGroupBox.Controls.Add(this.NutDiameterLabel);
-            this.NutGroupBox.Controls.Add(this.NutHeightLabel);
-            this.NutGroupBox.Location = new System.Drawing.Point(12, 219);
-            this.NutGroupBox.Name = "NutGroupBox";
-            this.NutGroupBox.Size = new System.Drawing.Size(334, 81);
-            this.NutGroupBox.TabIndex = 2;
-            this.NutGroupBox.TabStop = false;
-            this.NutGroupBox.Text = "Гайка";
-            // 
-            // NutDiameterNumeric
-            // 
-            this.NutDiameterNumeric.Location = new System.Drawing.Point(244, 49);
-            this.NutDiameterNumeric.Maximum = new decimal(new int[] {
-            48,
-            0,
-            0,
-            0});
-            this.NutDiameterNumeric.Minimum = new decimal(new int[] {
-            6,
-            0,
-            0,
-            0});
-            this.NutDiameterNumeric.Name = "NutDiameterNumeric";
-            this.NutDiameterNumeric.Size = new System.Drawing.Size(78, 20);
-            this.NutDiameterNumeric.TabIndex = 14;
-            this.NutDiameterNumeric.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
-            // NutHeightNumeric
-            // 
-            this.NutHeightNumeric.Location = new System.Drawing.Point(244, 23);
-            this.NutHeightNumeric.Maximum = new decimal(new int[] {
+            this.ChamferRadiusNumeric.Location = new System.Drawing.Point(292, 146);
+            this.ChamferRadiusNumeric.Margin = new System.Windows.Forms.Padding(4);
+            this.ChamferRadiusNumeric.Maximum = new decimal(new int[] {
             30,
             0,
             0,
             0});
-            this.NutHeightNumeric.Minimum = new decimal(new int[] {
-            5,
+            this.ChamferRadiusNumeric.Minimum = new decimal(new int[] {
+            1,
             0,
             0,
             0});
-            this.NutHeightNumeric.Name = "NutHeightNumeric";
-            this.NutHeightNumeric.Size = new System.Drawing.Size(78, 20);
-            this.NutHeightNumeric.TabIndex = 15;
-            this.NutHeightNumeric.Value = new decimal(new int[] {
+            this.ChamferRadiusNumeric.Name = "ChamferRadiusNumeric";
+            this.ChamferRadiusNumeric.Size = new System.Drawing.Size(137, 22);
+            this.ChamferRadiusNumeric.TabIndex = 15;
+            this.ChamferRadiusNumeric.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // NutDiameterLabel
+            // HatDiameterNumeric
             // 
-            this.NutDiameterLabel.AutoSize = true;
-            this.NutDiameterLabel.Location = new System.Drawing.Point(3, 51);
-            this.NutDiameterLabel.Name = "NutDiameterLabel";
-            this.NutDiameterLabel.Size = new System.Drawing.Size(102, 13);
-            this.NutDiameterLabel.TabIndex = 15;
-            this.NutDiameterLabel.Text = "Диаметр гайки (D)";
+            this.HatDiameterNumeric.Location = new System.Drawing.Point(292, 23);
+            this.HatDiameterNumeric.Margin = new System.Windows.Forms.Padding(4);
+            this.HatDiameterNumeric.Maximum = new decimal(new int[] {
+            150,
+            0,
+            0,
+            0});
+            this.HatDiameterNumeric.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.HatDiameterNumeric.Name = "HatDiameterNumeric";
+            this.HatDiameterNumeric.Size = new System.Drawing.Size(137, 22);
+            this.HatDiameterNumeric.TabIndex = 11;
+            this.HatDiameterNumeric.Value = new decimal(new int[] {
+            85,
+            0,
+            0,
+            0});
             // 
-            // NutHeightLabel
+            // lbl5
             // 
-            this.NutHeightLabel.AutoSize = true;
-            this.NutHeightLabel.Location = new System.Drawing.Point(3, 25);
-            this.NutHeightLabel.Name = "NutHeightLabel";
-            this.NutHeightLabel.Size = new System.Drawing.Size(94, 13);
-            this.NutHeightLabel.TabIndex = 14;
-            this.NutHeightLabel.Text = "Высота гайки (H)";
+            this.lbl5.AutoSize = true;
+            this.lbl5.Location = new System.Drawing.Point(8, 149);
+            this.lbl5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl5.Name = "lbl5";
+            this.lbl5.Size = new System.Drawing.Size(133, 17);
+            this.lbl5.TabIndex = 14;
+            this.lbl5.Text = "Радиус скругления";
+            // 
+            // ThreadLengthNumeric
+            // 
+            this.ThreadLengthNumeric.Location = new System.Drawing.Point(292, 114);
+            this.ThreadLengthNumeric.Margin = new System.Windows.Forms.Padding(4);
+            this.ThreadLengthNumeric.Maximum = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            this.ThreadLengthNumeric.Minimum = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            this.ThreadLengthNumeric.Name = "ThreadLengthNumeric";
+            this.ThreadLengthNumeric.Size = new System.Drawing.Size(137, 22);
+            this.ThreadLengthNumeric.TabIndex = 13;
+            this.ThreadLengthNumeric.Value = new decimal(new int[] {
+            375,
+            0,
+            0,
+            0});
+            // 
+            // KernelLengthNumeric
+            // 
+            this.KernelLengthNumeric.Location = new System.Drawing.Point(292, 82);
+            this.KernelLengthNumeric.Margin = new System.Windows.Forms.Padding(4);
+            this.KernelLengthNumeric.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.KernelLengthNumeric.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.KernelLengthNumeric.Name = "KernelLengthNumeric";
+            this.KernelLengthNumeric.Size = new System.Drawing.Size(137, 22);
+            this.KernelLengthNumeric.TabIndex = 12;
+            this.KernelLengthNumeric.Value = new decimal(new int[] {
+            500,
+            0,
+            0,
+            0});
+            // 
+            // HatLengthNumeric
+            // 
+            this.HatLengthNumeric.Location = new System.Drawing.Point(292, 52);
+            this.HatLengthNumeric.Margin = new System.Windows.Forms.Padding(4);
+            this.HatLengthNumeric.Maximum = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            this.HatLengthNumeric.Minimum = new decimal(new int[] {
+            21,
+            0,
+            0,
+            0});
+            this.HatLengthNumeric.Name = "HatLengthNumeric";
+            this.HatLengthNumeric.Size = new System.Drawing.Size(137, 22);
+            this.HatLengthNumeric.TabIndex = 10;
+            this.HatLengthNumeric.Value = new decimal(new int[] {
+            25,
+            0,
+            0,
+            0});
+            // 
+            // lbl4
+            // 
+            this.lbl4.AutoSize = true;
+            this.lbl4.Location = new System.Drawing.Point(8, 117);
+            this.lbl4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl4.Name = "lbl4";
+            this.lbl4.Size = new System.Drawing.Size(268, 17);
+            this.lbl4.TabIndex = 9;
+            this.lbl4.Text = "Длина резьбовой части стержня болта";
+            // 
+            // lbl3
+            // 
+            this.lbl3.AutoSize = true;
+            this.lbl3.Location = new System.Drawing.Point(8, 85);
+            this.lbl3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl3.Name = "lbl3";
+            this.lbl3.Size = new System.Drawing.Size(153, 17);
+            this.lbl3.TabIndex = 8;
+            this.lbl3.Text = "Длина стержня болта";
+            // 
+            // lbl1
+            // 
+            this.lbl1.AutoSize = true;
+            this.lbl1.Location = new System.Drawing.Point(8, 55);
+            this.lbl1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl1.Name = "lbl1";
+            this.lbl1.Size = new System.Drawing.Size(111, 17);
+            this.lbl1.TabIndex = 3;
+            this.lbl1.Text = "Высота шляпки";
             // 
             // BuildButton
             // 
-            this.BuildButton.Location = new System.Drawing.Point(219, 306);
+            this.BuildButton.Location = new System.Drawing.Point(308, 321);
+            this.BuildButton.Margin = new System.Windows.Forms.Padding(4);
             this.BuildButton.Name = "BuildButton";
-            this.BuildButton.Size = new System.Drawing.Size(115, 25);
+            this.BuildButton.Size = new System.Drawing.Size(153, 31);
             this.BuildButton.TabIndex = 2;
             this.BuildButton.Text = "Построить";
             this.BuildButton.UseVisualStyleBackColor = true;
@@ -316,27 +309,24 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(353, 338);
+            this.ClientSize = new System.Drawing.Size(471, 358);
             this.Controls.Add(this.BuildButton);
-            this.Controls.Add(this.NutGroupBox);
             this.Controls.Add(this.BoltGroupBox);
             this.Controls.Add(this.KompasGroupBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "Болт с гайкой";
             this.KompasGroupBox.ResumeLayout(false);
             this.BoltGroupBox.ResumeLayout(false);
             this.BoltGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadDiameterNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.HeadLengthNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ChamferRadiusNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HatDiameterNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ThreadLengthNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.SmoothLengthNumeric)).EndInit();
-            this.NutGroupBox.ResumeLayout(false);
-            this.NutGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NutDiameterNumeric)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NutHeightNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.KernelLengthNumeric)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.HatLengthNumeric)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -346,20 +336,19 @@
         private System.Windows.Forms.Button CloseButton;
         private System.Windows.Forms.Button LaunchButton;
         private System.Windows.Forms.GroupBox BoltGroupBox;
-        private System.Windows.Forms.GroupBox NutGroupBox;
-        private System.Windows.Forms.Label HeadDiameterLabel;
-        private System.Windows.Forms.Label HeadLengthLabel;
-        private System.Windows.Forms.Label ThreadLabel;
-        private System.Windows.Forms.Label SmoothLengthLabel;
-        private System.Windows.Forms.NumericUpDown HeadDiameterNumeric;
-        private System.Windows.Forms.NumericUpDown HeadLengthNumeric;
+        private System.Windows.Forms.Label lbl4;
+        private System.Windows.Forms.Label lbl3;
+        private System.Windows.Forms.Label lbl2;
+        private System.Windows.Forms.Label lbl1;
         private System.Windows.Forms.NumericUpDown ThreadLengthNumeric;
-        private System.Windows.Forms.NumericUpDown SmoothLengthNumeric;
-        private System.Windows.Forms.NumericUpDown NutDiameterNumeric;
-        private System.Windows.Forms.NumericUpDown NutHeightNumeric;
-        private System.Windows.Forms.Label NutDiameterLabel;
-        private System.Windows.Forms.Label NutHeightLabel;
+        private System.Windows.Forms.NumericUpDown KernelLengthNumeric;
+        private System.Windows.Forms.NumericUpDown HatDiameterNumeric;
+        private System.Windows.Forms.NumericUpDown HatLengthNumeric;
         private System.Windows.Forms.Button BuildButton;
+        private System.Windows.Forms.NumericUpDown ChamferRadiusNumeric;
+        private System.Windows.Forms.Label lbl5;
+        private System.Windows.Forms.ComboBox ScrewdriverHoleTypeComboBox;
+        private System.Windows.Forms.Label lbl6;
     }
 }
 

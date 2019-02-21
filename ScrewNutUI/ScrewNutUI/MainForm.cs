@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using ScrewNutUI.Builders;
-using ScrewNutUI.Parameters;
 
 namespace ScrewNutUI
 {
@@ -11,30 +13,41 @@ namespace ScrewNutUI
         #region Private fields
 
         /// <summary>
-		/// Менеджер сессии Компас
-		/// </summary>
-		private KompasApplication _kompasApp;
-
-        /// <summary>
-        /// Параметры фигуры
+        ///     Session manager
         /// </summary>
-        private List<double> _figureParameters;
+        private KompasApplication _kompasApp;
 
         #endregion
 
         #region Constructor
 
         /// <summary>
-        /// Конструктор по умолчанию
+        ///     Object costructor
         /// </summary>
         public MainForm()
         {
             InitializeComponent();
 
-            CloseButton.Enabled = false;
-            BuildButton.Enabled = false;
-            SetAllInputsEnabledState(false);
+            _kompasApp = new KompasApplication
+            {
+                Parameters = new List<double>()
+            };
 
+            SetAllInputsEnabledState(_kompasApp.KompasObject != null);
+            LaunchButton.Enabled = _kompasApp.KompasObject == null;
+
+            ScrewdriverHoleTypeComboBox.DisplayMember = "Description";
+            ScrewdriverHoleTypeComboBox.ValueMember = "Value";
+            ScrewdriverHoleTypeComboBox.DataSource = Enum.GetValues(typeof(ScrewdriverHoleType))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()),
+                        typeof(DescriptionAttribute)) as DescriptionAttribute)?.Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
         }
 
         #endregion
@@ -42,13 +55,15 @@ namespace ScrewNutUI
         #region Private Method
 
         /// <summary>
-        /// Включение контролов ввода
+        ///     Включение контролов ввода
         /// </summary>
         /// <param name="state">Состояние</param>
         private void SetAllInputsEnabledState(bool state)
         {
-            NutDiameterNumeric.Enabled = NutHeightNumeric.Enabled = HeadDiameterNumeric.Enabled 
-                = HeadLengthNumeric.Enabled = SmoothLengthNumeric.Enabled = ThreadLengthNumeric.Enabled = state;
+            KernelLengthNumeric.Enabled = ThreadLengthNumeric.Enabled =
+                HatLengthNumeric.Enabled = HatDiameterNumeric.Enabled =
+                    ChamferRadiusNumeric.Enabled = ScrewdriverHoleTypeComboBox.Enabled 
+                        = CloseButton.Enabled = BuildButton.Enabled = state;
         }
 
         #endregion
@@ -56,29 +71,22 @@ namespace ScrewNutUI
         #region Event Handler
 
         /// <summary>
-        /// Кнопка запуска Компас
+        ///     Connect to Kompas 3D
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void LaunchButton_Click(object sender, EventArgs e)
         {
-            // Создать либо подключиться к Компас
-            _kompasApp = new KompasApplication();
             if (_kompasApp == null)
-            {
                 throw new ArgumentNullException("KompasApp не имеет экземпляра");
-            }
 
-            SetAllInputsEnabledState(true);
-
-            BuildButton.Enabled = true;
-
-            LaunchButton.Enabled = false;
-            CloseButton.Enabled = true;
+            var launchCompasResult = _kompasApp.CreateNewApp();
+            SetAllInputsEnabledState(launchCompasResult);
+            LaunchButton.Enabled = !launchCompasResult;
         }
 
         /// <summary>
-        /// Кнопка закрытия компаса
+        ///     Close Kompas 3D
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -86,42 +94,64 @@ namespace ScrewNutUI
         {
             SetAllInputsEnabledState(false);
 
-            BuildButton.Enabled = false;
-
             LaunchButton.Enabled = true;
-            CloseButton.Enabled = false;
             try
             {
                 _kompasApp.DestructApp();
             }
-            catch (System.Runtime.InteropServices.COMException) // Если Компас закрыт, то просто вернуть состояние при запуске
+            catch (COMException)
             {
                 _kompasApp = null;
             }
         }
 
         /// <summary>
-        /// Обработчик нажатия на кнопку "Построить"
+        ///     Build screw hanling
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void BuildButton_Click(object sender, EventArgs e)
         {
-            _kompasApp.CreateDocument3D();
-            var builder = new BoltBuilder(_kompasApp);
-            var parameters = new BoltParameters
+            try
             {
-                DiameterOut = 5,
-                HatHeight = 3,
-                ChamferAngle = 15,
-                ShaftDiameter = 2.5,
-                ShaftLength = 5
+                _kompasApp.Parameters = GetNumericScrewParameters();
+                _kompasApp.ScrewdriverHoleType =
+                    (ScrewdriverHoleType)ScrewdriverHoleTypeComboBox.SelectedValue;
+                _kompasApp.CreateDocument3D();
+                var builder = new ScrewBuilder(_kompasApp);
+                builder.CreateDetail();
+            }
+            catch (Exception exception) when(exception is ArgumentException 
+                                             || exception is InvalidOperationException
+                                             || exception is NullReferenceException)
+            {
+                MessageBox.Show(exception.Message, @"Ошибка", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                _kompasApp.Document3D?.close();
+            }
+        }
+
+        /// <summary>
+        /// Get all values from numerics control
+        /// </summary>
+        /// <returns></returns>
+        private List<double> GetNumericScrewParameters()
+        {
+            if (ThreadLengthNumeric.Value >= KernelLengthNumeric.Value * (decimal) 0.85)
+            {
+                throw new ArgumentException("Длина резьбы не может составлять " +
+                                            "более 85% от длины всего стержня");
+            }
+            return new List<double>
+            {
+                (double) HatDiameterNumeric.Value,
+                (double) HatLengthNumeric.Value,
+                (double) KernelLengthNumeric.Value,
+                (double) ThreadLengthNumeric.Value,
+                (double) ChamferRadiusNumeric.Value
             };
-            builder.BuildDetail(parameters);
         }
 
         #endregion
-
-
     }
 }
