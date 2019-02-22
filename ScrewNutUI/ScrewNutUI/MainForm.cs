@@ -77,12 +77,15 @@ namespace ScrewNutUI
         /// <param name="e"></param>
         private void LaunchButton_Click(object sender, EventArgs e)
         {
+            _kompasApp = new KompasApplication
+            {
+                Parameters = new List<double>()
+            };
             if (_kompasApp == null)
                 throw new ArgumentNullException("KompasApp не имеет экземпляра");
 
-            var launchCompasResult = _kompasApp.CreateNewApp();
-            SetAllInputsEnabledState(launchCompasResult);
-            LaunchButton.Enabled = !launchCompasResult;
+            SetAllInputsEnabledState(true);
+            LaunchButton.Enabled = false;
         }
 
         /// <summary>
