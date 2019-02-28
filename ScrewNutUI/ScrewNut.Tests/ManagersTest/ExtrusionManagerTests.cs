@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Kompas6API5;
 using Kompas6Constants3D;
 using NUnit.Framework;
@@ -16,6 +17,7 @@ namespace ScrewNut.Tests.ManagersTest
         [SetUp]
         public void InitializeKompasInstance()
         {
+            Thread.Sleep(1500);
             _kompasApplication = TestHelper.GetKompasInstance();
         }
 

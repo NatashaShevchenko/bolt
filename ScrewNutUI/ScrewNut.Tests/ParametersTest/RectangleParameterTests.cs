@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using NUnit.Framework;
 using ScrewNutUI;
 using ScrewNutUI.Parameters;
@@ -13,6 +14,7 @@ namespace ScrewNut.Tests.ParametersTest
         [SetUp]
         public void InitializeKompasInstance()
         {
+            Thread.Sleep(1500);
             _kompasApplication = TestHelper.GetKompasInstance();
         }
 
