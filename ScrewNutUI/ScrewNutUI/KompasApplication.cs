@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.InteropServices;
 using Kompas6API5;
 using Kompas6Constants3D;
@@ -27,13 +29,15 @@ namespace ScrewNutUI
     /// </summary>
     public class KompasApplication
     {
+        private List<double> _parameters;
+
         /// <summary>
         ///     Object constructor
         /// </summary>
-        public KompasApplication()
+        public KompasApplication(bool visibleApp = true)
         {
             if (!GetActiveApp())
-                if (!CreateNewApp())
+                if (!CreateNewApp(visibleApp))
                 {
                     throw new InvalidOperationException("При подключению к Компасу произошла ошибка");
                 }
@@ -57,7 +61,21 @@ namespace ScrewNutUI
         /// <summary>
         ///     Model parameters
         /// </summary>
-        public List<double> Parameters { get; set; }
+        public List<double> Parameters
+        {
+            get => _parameters;
+            set
+            {
+                if (value.All(IsCorrect) && value.Count == 5)
+                {
+                    _parameters = value;
+                }
+                else
+                {
+                    throw new InvalidOperationException("Один или больше параметров некорректны");
+                }
+            }
+        }
 
         public ScrewdriverHoleType ScrewdriverHoleType { get; set; }
 
@@ -74,6 +92,24 @@ namespace ScrewNutUI
 
             // Create screw detail on 3D document
             ScrewPart = (ksPart) Document3D.GetPart((short) Part_Type.pTop_Part);
+        }
+
+        /// <summary>
+        ///     Destruct Kompas 3D application
+        /// </summary>
+        public void DestructApp()
+        {
+            Document3D?.close();
+            KompasObject.Quit();
+            KompasObject = null;
+
+            Document3D = null;
+            ScrewPart = null;
+
+            foreach (var process in Process.GetProcessesByName("KOMPAS"))
+            {
+                process.Kill();
+            }
         }
 
         /// <summary>
@@ -107,30 +143,27 @@ namespace ScrewNutUI
         ///     Create new session Kompas 3D
         /// </summary>
         /// <returns>true, if succesfull, false, if have errors</returns>
-        public bool CreateNewApp()
+        private bool CreateNewApp(bool visible)
         {
             var t = Type.GetTypeFromProgID("KOMPAS.Application.5");
             KompasObject = (KompasObject) Activator.CreateInstance(t);
 
             if (KompasObject == null) return false;
 
-            KompasObject.Visible = true;
+            KompasObject.Visible = visible;
             KompasObject.ActivateControllerAPI();
 
             return true;
         }
 
         /// <summary>
-        ///     Destruct Kompas 3D application
+        ///     Check on infinity and NaN
         /// </summary>
-        public void DestructApp()
+        /// <param name="value">verifiable value</param>
+        /// <returns>is correct or not</returns>
+        private bool IsCorrect(double value)
         {
-            Document3D?.close();
-            KompasObject.Quit();
-            KompasObject = null;
-
-            Document3D = null;
-            ScrewPart = null;
+            return !double.IsInfinity(value) && !double.IsNaN(value) && value >= 0;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Kompas6API5;
+﻿using System;
+using Kompas6API5;
 using Kompas6Constants;
 
 namespace ScrewNutUI.Parameters
@@ -18,11 +19,15 @@ namespace ScrewNutUI.Parameters
         /// <param name="point2D">2D point of rectangle position on sketch</param>
         public RectangleParameter(KompasApplication kompasApp, double width, double height, Point2D point2D)
         {
-            if (kompasApp == null) return;
+            if (kompasApp == null)
+                throw new ArgumentNullException(nameof(kompasApp));
 
             if (width <= 0.0
                 || height <= 0.0)
-                return;
+            {
+                throw new ArgumentException("Ошибка при создании прямоугольника. " +
+                                            "Введите корректные параметры и попробуйте снова");
+            }
 
             ksRectangleParam rectangleParam =
                 kompasApp.KompasObject.GetParamStruct((short) StructType2DEnum.ko_RectangleParam);

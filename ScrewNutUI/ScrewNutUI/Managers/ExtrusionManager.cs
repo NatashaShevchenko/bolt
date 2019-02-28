@@ -1,4 +1,5 @@
-﻿using Kompas6API5;
+﻿using System;
+using Kompas6API5;
 using Kompas6Constants3D;
 using ScrewNutUI.Builders;
 using ScrewNutUI.Parameters;
@@ -44,30 +45,43 @@ namespace ScrewNutUI.Managers
         /// <summary>
         ///     Extrusion by direction, depth and extrudable entity
         /// </summary>
+        /// <param name="parameters"></param>
         /// <param name="extrusionType">Extrusion type</param>
         public ExtrusionManager(KompasExtrusionParameters parameters, ExtrusionType extrusionType)
         {
             // Extrusion entity
-            var entity = (ksEntity) parameters.Document3DPart.NewEntity((short) parameters.ExtrusionType);
+            var entity = (ksEntity) parameters.Document3DPart
+                .NewEntity((short) parameters.ExtrusionType);
 
-            if (parameters.ExtrusionType != Obj3dType.o3d_baseLoft)
-                if (parameters.ExtrudableEntity == null)
-                    return;
+            if (parameters.ExtrusionType != Obj3dType.o3d_baseLoft 
+                && parameters.ExtrudableEntity == null)
+            {
+                GenerateException();
+            }
 
             // Get direction of extrusion
             var normalDirection = true;
 
             if (extrusionType == ExtrusionType.ByEntity)
             {
-                if (parameters.Direction == Direction_Type.dtNormal)
-                    normalDirection = true;
-                else if (parameters.Direction == Direction_Type.dtReverse)
+                if (parameters.Direction == Direction_Type.dtReverse)
+                {
                     normalDirection = false;
+                }
+                else if (parameters.Direction == Direction_Type.dtNormal)
+                {
+                    normalDirection = true;
+                }
                 else
-                    return;
+                {
+                    GenerateException();
+                }
 
                 // Depth must not be equal to zero
-                if (parameters.Depth == default(double)) return;
+                if (Math.Abs(parameters.Depth) < 0.001)
+                {
+                    GenerateException();
+                }
             }
 
             // Entity faces count before extrusion
@@ -78,10 +92,16 @@ namespace ScrewNutUI.Managers
             switch (extrusionType)
             {
                 case ExtrusionType.ByEntity:
-                    if (!CreateExtrusionByDirection(entity, parameters, normalDirection)) return;
+                    if (!CreateExtrusionByDirection(entity, parameters, normalDirection))
+                    {
+                        GenerateException();
+                    }
                     break;
                 case ExtrusionType.BySketchesCollection:
-                    if (!CreateExtrusionBySketchCollection(entity, parameters)) return;
+                    if (!CreateExtrusionBySketchCollection(entity, parameters))
+                    {
+                        GenerateException();
+                    }
                     break;
             }
 
@@ -142,9 +162,6 @@ namespace ScrewNutUI.Managers
         ///     Create extrusion based on extrudable sketch
         /// </summary>
         /// <param name="entity">Entity of extrusion</param>
-        /// <param name="extrusionType">Extrusion type</param>
-        /// <param name="extrudableEntity">Extrudable entity</param>
-        /// <param name="sketchesCollection">Sketches collection for extrusion</param>
         /// <returns>true if operation is successful; false in case of error</returns>
         private bool CreateExtrusionBySketchCollection(ksEntity entity, KompasExtrusionParameters parameters)
         {
@@ -172,10 +189,7 @@ namespace ScrewNutUI.Managers
         ///     Set base extruson definition
         /// </summary>
         /// <param name="entity">Extrusion entity</param>
-        /// <param name="extrudableEntity">Extrudable entity</param>
-        /// <param name="direction">Extrusion direction</param>
         /// <param name="normalDirection">Normal direction of extrusion</param>
-        /// <param name="depth">Extrusion depth</param>
         /// <returns>true if operation successful, false in case of error</returns>
         private bool SetBaseExtrusionDefinition(ksEntity entity, KompasExtrusionParameters parameters,
             bool normalDirection)
@@ -196,10 +210,6 @@ namespace ScrewNutUI.Managers
         ///     Set cut extrusion
         /// </summary>
         /// <param name="entity">Extrusion entity</param>
-        /// <param name="extrudableEntity">Extrudable entity</param>
-        /// <param name="direction">Extrusion direction</param>
-        /// <param name="normalDirection">Normal direction of extrusion</param>
-        /// <param name="depth">Extrusion depth</param>
         /// <returns>true if operation successful, false in case of error</returns>
         private bool SetCutExtrusionDefinition(ksEntity entity, KompasExtrusionParameters parameters,
             bool normalDirection)
@@ -220,7 +230,6 @@ namespace ScrewNutUI.Managers
         ///     Set base loft definition
         /// </summary>
         /// <param name="entity">Extruson entity</param>
-        /// <param name="sketchesCollection">Loft sketches collection</param>
         /// <returns>true if operation successful, false in case of error</returns>
         private bool SetBaseLoftDefinition(ksEntity entity, KompasExtrusionParameters parameters)
         {
@@ -276,7 +285,6 @@ namespace ScrewNutUI.Managers
         ///     Set cut evolution extrusion definition
         /// </summary>
         /// <param name="entity">Extruson entity</param>
-        /// <param name="sketchesCollection">Loft sketches collection</param>
         /// <returns>true if operation successful, false in case of error</returns>
         private bool SetCutEvolutionDefinition(ksEntity entity, KompasExtrusionParameters parameters)
         {
@@ -297,21 +305,7 @@ namespace ScrewNutUI.Managers
         }
 
         /// <summary>
-        ///     Get extruded entity by <seealso cref="_baseFaceAreaState">information about _main_ base face area</seealso>
-        ///     Комментарий к реализации метода.
-        ///     Рассмотрим несколько ситуаций:
-        ///     1. Main меньше, чем Parallel
-        ///     1.1 Работаем с RegPoly
-        ///     Если это 5ти- и более гранник, то геттим 2 плоскости
-        ///     1.2 Работаем с Cylinder
-        ///     Геттим 2 плоскости
-        ///     При этом одна из них обязательно будет меньше второй, по этому факту и определяем нужную плоскость
-        ///     2. Main больше, чем Parallel
-        ///     2.1 Работаем с RegPoly
-        ///     Main не существует как плоскости, поэтому граней на одну меньше, в итоге геттим лишь одну грань
-        ///     2.2 Работаем с Cylinder
-        ///     Геттим только ту плоскость, которая не IsCylinder; индекс второй оставляем 0
-        ///     В конечном счёте останется лишь одна плоскость
+        ///     Get extruded entity
         /// </summary>
         /// <returns>Extruded entity</returns>
         private ksEntity GetExtrudedEntity()
@@ -345,12 +339,10 @@ namespace ScrewNutUI.Managers
             return entity;
         }
 
-        /// <summary>
-        ///     Set extruded entity to null for further refinding of _main_ base plane
-        /// </summary>
-        public void ResetExtrudedEntity()
+        private void GenerateException()
         {
-            _extrudedEntity = null;
+            throw new InvalidOperationException("Ошибка при создании выдавливания. " +
+                                        "Введите корректные параметры и попробуйте снова");
         }
     }
 }

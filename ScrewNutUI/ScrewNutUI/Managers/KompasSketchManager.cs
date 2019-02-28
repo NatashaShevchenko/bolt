@@ -32,7 +32,10 @@ namespace ScrewNutUI.Managers
         /// <param name="basePlane">Base plane</param>
         public KompasSketchManager(ksPart doc3DPart, ksEntity basePlane)
         {
-            if (doc3DPart == null || basePlane == null) return;
+            if (doc3DPart == null || basePlane == null)
+            {
+                throw new ArgumentNullException("Ошибка при создании эскиза.");
+            }
 
             _basePlane = basePlane;
 
@@ -52,7 +55,7 @@ namespace ScrewNutUI.Managers
                   || basePlaneAxis == Obj3dType.o3d_planeXOZ
                   || basePlaneAxis == Obj3dType.o3d_planeYOZ))
             {
-                throw new ArgumentException("Ошибка при построении эскизка.");
+                throw new ArgumentException("Ошибка при построении эскиза.");
             }
 
             _basePlaneAxis = basePlaneAxis;

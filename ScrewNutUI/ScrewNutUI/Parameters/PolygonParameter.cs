@@ -17,10 +17,11 @@ namespace ScrewNutUI.Parameters
         /// <param name="anglesCount">Angles count</param>
         /// <param name="inscribedCircleRadius">Inscribed circle radius</param>
         /// <param name="point2D">Two-dimensional point of figure base</param>
-        public PolygonParameter(KompasApplication kompasApp, int anglesCount, double inscribedCircleRadius,
-            Point2D point2D)
+        public PolygonParameter(KompasApplication kompasApp, int anglesCount, 
+            double inscribedCircleRadius, Point2D point2D)
         {
-            if (kompasApp == null) return;
+            if (kompasApp == null)
+                throw new ArgumentNullException(nameof(kompasApp));
 
             if (anglesCount <= 2
                 || anglesCount >= 13

@@ -18,12 +18,14 @@ namespace ScrewNutUI.Builders
         /// </summary>
         /// <param name="kompasApp">Kompas application specimen</param>
         /// <param name="basePlane">Base plane of muffler, by default is null</param>
-        public MufflerBuilder(KompasApplication kompasApp, Obj3dType basePlaneAxis, Direction_Type direction,
-            Point2D basePlanePoint, ksEntity basePlane = null)
+        public MufflerBuilder(KompasApplication kompasApp, Obj3dType basePlaneAxis, 
+            Direction_Type direction, Point2D basePlanePoint, ksEntity basePlane = null)
         {
             if (!(direction == Direction_Type.dtNormal
                   || direction == Direction_Type.dtReverse))
+            {
                 throw new ArgumentException("Ошибка при создании вспомогательного элемента.");
+            }
 
             _kompasApp = kompasApp;
             Document3DPart = kompasApp.ScrewPart;
@@ -64,7 +66,6 @@ namespace ScrewNutUI.Builders
         /// <summary>
         ///     Create muffler in detail in base plane axis
         /// </summary>
-        /// <param name="figureParameters">Parameters of muffler</param>
         /// <param name="basePlane">Base plane of muffler, by default is null</param>
         /// <returns>Muffler extrusion or null if extrusion returns error</returns>
         private ExtrusionManager CreateMuffler(ksEntity basePlane)

@@ -6,38 +6,38 @@ namespace ScrewNutUI.Parameters
     /// <summary>
     ///     Parameters for "KompasExtrusion" class.
     /// </summary>
-    public struct KompasExtrusionParameters
+    public class KompasExtrusionParameters
     {
         /// <summary>
         ///     Part with detail in 3d document
         /// </summary>
-        public ksPart Document3DPart;
+        public ksPart Document3DPart { get; }
 
         /// <summary>
         ///     Type of extrusion
         /// </summary>
-        public Obj3dType ExtrusionType;
+        public Obj3dType ExtrusionType { get; }
 
         /// <summary>
-        ///     Extrudable (выдавливаЕМЫЙ) entity
+        ///     Extrudable entity
         /// </summary>
-        public ksEntity ExtrudableEntity;
+        public ksEntity ExtrudableEntity { get; }
 
         /// <summary>
         ///     Type of direction of extrusion
         /// </summary>
-        public Direction_Type Direction;
+        public Direction_Type Direction { get; }
 
         /// <summary>
         ///     Depth of extrusion
         /// </summary>
-        public double Depth;
+        public double Depth { get; }
 
         /// <summary>
         ///     Collection of extrudable sketches for types
         ///     such as loft, evolution etc.
         /// </summary>
-        public ksEntityCollection SketchesCollection;
+        public ksEntityCollection SketchesCollection { get; }
 
         /// <summary>
         ///     Kompas extrusion parameters for extrusion by entity

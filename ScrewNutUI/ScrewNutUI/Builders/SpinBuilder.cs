@@ -9,7 +9,7 @@ namespace ScrewNutUI.Builders
 	/// Spin class.
 	/// Presents spin parameters of 2D document.
 	/// </summary>
-	class SpinBuilder
+	internal class SpinBuilder
 	{
 	    /// <summary>
 	    /// Part of document with detail

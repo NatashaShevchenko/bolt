@@ -41,7 +41,7 @@ namespace ScrewNutUI.Parameters
         /// <returns>is correct or not</returns>
         private bool IsCorrect(double value)
         {
-            return !double.IsInfinity(value) && !double.IsNaN(value);
+            return !double.IsInfinity(value) && !double.IsNaN(value) && Math.Abs(value) > 0.001;
         }
     }
 }

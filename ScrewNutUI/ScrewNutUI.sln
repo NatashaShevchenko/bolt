@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2046
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewNutUI", "ScrewNutUI\ScrewNutUI.csproj", "{FB2EC477-3CC0-4CA6-808A-89B765C1DC56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrewNut.Tests", "ScrewNut.Tests\ScrewNut.Tests.csproj", "{849E1CE8-704F-42AB-B0AD-EC4774BDFCD3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{FB2EC477-3CC0-4CA6-808A-89B765C1DC56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB2EC477-3CC0-4CA6-808A-89B765C1DC56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB2EC477-3CC0-4CA6-808A-89B765C1DC56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{849E1CE8-704F-42AB-B0AD-EC4774BDFCD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{849E1CE8-704F-42AB-B0AD-EC4774BDFCD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{849E1CE8-704F-42AB-B0AD-EC4774BDFCD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{849E1CE8-704F-42AB-B0AD-EC4774BDFCD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
